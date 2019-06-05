@@ -1,0 +1,181 @@
+<div class="main-content">
+  <div class="container-fluid">
+    <div class="row">
+      <div class="col-md-6">
+        <div class="card">
+          <div class="header">
+            <h4 class="title">Manage Items</h4>
+          </div>
+          <div class="content">
+
+            <form>
+              <div class="row">
+
+
+                <div class="col-md-3">
+                  <div class="form-group">
+                    <label for="inputState">Customer Id</label>
+                    <select style="font-size: medium" (change)="selectCustomer($event.target.value)" id="inputState" class="form-control">
+                      <option value="0"><strong>--select Id----</strong></option>
+                      <option *ngFor="let customer of customerArr" value={{customer.id}}>
+                        {{customer.id}}
+                      </option>
+                    </select>
+                  </div>
+                </div>
+
+                <div class="col-md-3">
+                <div class="form-group">
+                <label>Customer Name</label>
+                <input type="text" class="form-control"  [value]="idfield"  name="w" [(ngModel)]="customer.name">
+
+                </div>
+                </div>
+
+
+
+                <div class="col-md-2">
+                  <div class="form-group">
+                    <label>Order Id</label>
+                    <input type="text" class="form-control" [value]="oidfield"  name="oid"  [(ngModel)]="order.oid">
+                  </div>
+                </div>
+
+                <div class="col-md-3">
+                  <!--<div class="form-group">-->
+                    <!--<label>Date</label>-->
+                    <!--<input type="email" class="form-control" name="date"  [value]="datefield"     [(ngModel)]="order.date">-->
+                  <!--</div>-->
+                  <div class="form-group"> <!-- Date input -->
+                    <label class="control-label" for="date">Date</label>
+                    <!--{{ value_expression | date [ : format [ : timezone [ : locale ] ] ] }}-->
+                    <input type="text"
+                           class="form-control"
+                           [minDate]="minDate"
+                           [maxDate]="maxDate"
+                           #dp="bsDatepicker"
+                           bsDatepicker [(bsValue)]="myDateValue" id="date"   [bsConfig]="{dateInputFormat: 'YYYY-MM-DD'}"   (bsValueChange)="onValueChange($event)">
+
+                  </div>
+
+                </div>
+
+
+              </div>
+
+              <div class="row">
+
+
+                <div class="col-md-3">
+                  <div class="form-group">
+                    <label for="inputState1">Item  Code</label>
+                    <select style="font-size: medium" (change)="selectItemcode($event.target.value)" id="inputState1" class="form-control">
+                      <option value="0"><strong>--select Code----</strong></option>
+                      <option *ngFor="let items of itemArr" value={{items.code}}>
+                        {{items.code}}
+                      </option>
+                    </select>
+                  </div>
+                </div>
+
+                <div class="col-md-3">
+                <div class="form-group">
+                  <label>Item description</label>
+                  <input type="text"  class="form-control" [value]="descfield"  name="description"  [(ngModel)]="item.description">
+
+                </div>
+              </div>
+
+              <div class="col-md-2">
+                <div class="form-group">
+                  <label >Price</label>
+                  <input type="number" class="form-control"  disabled name="price"  [value]="pricefield" placeholder="Price"    [(ngModel)]="item.price">
+                </div>
+              </div>
+
+              <div class="col-md-2">
+                <div class="form-group">
+                  <label >Qty</label>
+                  <input type="number" class="form-control"  name="qty"  [value]="qtyfield" placeholder="Qty"    [(ngModel)]="qty">
+                </div>
+              </div>
+
+                <div class="col-md-2">
+                  <div class="form-group">
+                    <label >Stock</label>
+                    <input type="number" class="form-control"  disabled name="stockqty"  [value]="stockfield" placeholder="Qty"    [(ngModel)]=item.qty>
+                  </div>
+                </div>
+
+
+
+            </div>
+
+              <div class="row">
+
+                <div class="col-md-4">
+                  <div class="form-group">
+
+                  </div>
+                </div>
+              </div>
+              <button type="button" (click)="addItem()" class="btn btn-info btn-fill pull-right">Add Order</button>
+              <div class="clearfix"></div>
+            </form>
+            <div></div>
+            <div *ngIf="displayAlert">
+              <div class="alert alert-success" *ngIf="iscuccess;else fail">{{message}}</div>
+              <ng-template #fail><div class="alert alert-danger">{{message}}</div></ng-template>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!--view Customer-->
+      <div class="col-md-6" style="background-color: white">
+        <form>
+        <h4 class="card-title">Item Details</h4>
+        <table class="table table-hover">
+          <thead>
+          <tr>
+            <th>Code</th>
+            <th>Description</th>
+            <th>Price</th>
+            <th>Qty</th>
+            <th>Amount</th>
+            <th>Mode</th>
+
+          </tr>
+          </thead>
+          <tbody>
+          <tr *ngFor="let row of rows">
+            <td>{{row.code}}</td>
+            <td>{{row.description}}</td>
+            <td>{{row.price}}</td>
+            <td>{{row.qty}}</td>
+            <td>{{row.amount |number :'.2-3'}}</td>
+
+            <td><button class="btn btn-danger" (click)="deleteItem(row.code)">Delete Item</button></td>
+
+              <!--<button class="btn btn-primary"   (click)="modify(item)">Edit</button></td>-->
+
+          </tr>
+          </tbody>
+        </table>
+          <div>
+            <button type="button" (click)="saveOrder()" class="btn btn-primary btn-fill pull-right">Save Order</button>
+          </div>
+        </form>
+        <div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+
+
+
+
+
+

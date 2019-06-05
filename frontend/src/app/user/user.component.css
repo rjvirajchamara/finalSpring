@@ -1,0 +1,6 @@
+.main-content{
+    background-image: url('/src/assets/img/photo.JPG');
+    background-repeat: no-repeat;
+    background-size: cover;
+    -webkit-background-size: cover;
+}

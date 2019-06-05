@@ -1,0 +1,8 @@
+<component name="ArtifactManager">
+  <artifact type="war" name="absd-final-rest-app:war">
+    <output-path>$PROJECT_DIR$/target</output-path>
+    <root id="archive" name="absd-final-rest-app-1.0.0.war">
+      <element id="artifact" artifact-name="absd-final-rest-app:war exploded" />
+    </root>
+  </artifact>
+</component>
